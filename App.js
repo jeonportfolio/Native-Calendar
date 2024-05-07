@@ -6,6 +6,10 @@ import { useEffect, useState } from 'react';
 import Margin from './src/Margin';
 
 import { SimpleLineIcons } from '@expo/vector-icons';
+import DateTimePickerModal from "react-native-modal-datetime-picker";
+import { useCalendar } from './src/hook/use-calendar';
+import { useTodoList } from './src/hook/use-todo-list';
+
 
 const columsSize = 35;
 
@@ -45,10 +49,27 @@ const ArrowButton = ({ iconName, onPress }) => {
 
 export default function App() {
   const now = dayjs();
+  
+  const {
+    selectedDate,
+    isDatePickerVisible,
+    showDatePicker,
+    hideDatePicker,
+    handleConfirm,
+    subtract1Month,
+    add1Month,
+    setSelectedDate
+  } = useCalendar (now);
 
-  const [selectedDate, setSelectedDate] = useState(now);//초기값은now이고 그 이후의 값은 selectedDate
+  const {} = useTodoList(selectedDate);
 
-  const columns = getCalendarColumns(selectedDate);
+  const columns = getCalendarColumns(selectedDate); 
+
+  
+
+  const onPressLeftArrow = subtract1Month
+  const onPressRightArrow = add1Month
+
 
   const ListHeaderComponent = () => {
     
@@ -59,13 +80,14 @@ export default function App() {
        
         {/* 현재 날짜 표시 */}
           <View style={{ flexDirection: "row", justifyContent: "center", alignItems:"center"}}>
-              <ArrowButton iconName = "arrow-left" onPress={() => {}} />
+              <ArrowButton iconName = "arrow-left" onPress={onPressLeftArrow} />
 
-              <TouchableOpacity >
+              <TouchableOpacity onPress={showDatePicker}> 
+              {/* 날짜를 누르면 datepicker를 보여주는 것 */}
                   <Text style={{ fontSize: 20, color:"#404040"}}>{currentDateText}</Text>
               </TouchableOpacity>
 
-              <ArrowButton iconName = "arrow-right" onPress={() => {}} />
+              <ArrowButton iconName = "arrow-right" onPress={onPressRightArrow} />
         </View>
        
 
@@ -132,6 +154,13 @@ export default function App() {
             ListHeaderComponent={ListHeaderComponent}
         />   
         {/* flatList에도 key값을 줘야한다 인덱스에 따라서 키값을 부여한다. */}
+
+        <DateTimePickerModal
+            isVisible={isDatePickerVisible}
+            mode="date"
+            onConfirm={handleConfirm}
+            onCancel={hideDatePicker}
+        />
     </SafeAreaView>
   );
 }
