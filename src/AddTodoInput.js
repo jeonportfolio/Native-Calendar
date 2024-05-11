@@ -29,8 +29,8 @@ export default ({
           color: "#595959",
         }}
         onSubmitEditing={onSubmitEditing}
-        blurOnSubmit={false}
-        onFocus={onFocus}
+        blurOnSubmit={false} //입력 완료후에도 키보드가 내려가지 않음 
+        onFocus={onFocus} //
       />
       <TouchableOpacity onPress={onPressAdd} style={{ padding: 5 }}>
         <AntDesign name="plus" size={18} color="#595959" />

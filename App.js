@@ -113,7 +113,8 @@ export default function App() {
     setTimeout(() => {
       flatListRef.current?.scrollToEnd({ animated: true });
     }, 300);
-  }
+  } //입력 후 입력한 가장 마지막으로 스크롤해주는 함수 
+
   const onPressAdd = () => {
     addTodo();
     resetInput();
@@ -127,7 +128,6 @@ export default function App() {
   const onFocus = () => {
     scrollToEnd();
   };
-
   useEffect(() => {
     runPracticeDayjs();
   }, []);

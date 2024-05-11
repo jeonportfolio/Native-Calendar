@@ -24,3 +24,10 @@ npm install @react-native-async-storage/async-storage
 
 #text input 입력 
 keyboardAvodingView 사용 -> 입력창 키보드 피하기
+
+
+#onLongPress -> todoList 삭제옵션 추가 
+사용자가 todo목록을 길게 누르면 삭제가 가능한 기능을 추가
+
+#onPressAdd -> todoList 추가옵션 추가 
+사용자가 +버튼을 누르면 todoList를 추가할 수 있는 옵션 

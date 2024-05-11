@@ -67,6 +67,7 @@ export const useTodoList = (selectedDate) =>{
   }
 
   const resetInput = () => setInput("");
+  // 목록 추가 후 입력창을 리셋시킨다.
 
   const filteredTodoList = todoList.filter(todo => {
     const isSameDate = dayjs(todo.date).isSame(selectedDate, 'date');
