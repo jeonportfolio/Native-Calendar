@@ -2,6 +2,7 @@ import React from 'react';
 import { View, Text, FlatList, TouchableOpacity } from 'react-native';
 import dayjs from 'dayjs';
 import { SimpleLineIcons } from '@expo/vector-icons'; 
+import FontAwesome from '@expo/vector-icons/FontAwesome';
 
 import { getDayColor, getDayText } from './util';
 
@@ -29,13 +30,14 @@ const Column = ({
         borderRadius: columnSize / 2,
         }}>
       <Text style={{ color, opacity, fontWeight: hasTodo ? "bold" : "normal" }}>{text}</Text>
+      {/* 일정이 있으면 굵게 표시 없으면 기본 그대로 */}
     </TouchableOpacity>
   )
 }
 const ArrowButton = ({ iconName, onPress }) => {
   return (
     <TouchableOpacity onPress={onPress} style={{ paddingHorizontal: 20, paddingVertical: 15 }}>
-      <SimpleLineIcons name={iconName} size={15} color="#404040" />
+      <SimpleLineIcons name={iconName} size={15} color="#000000" />
     </TouchableOpacity>
   )
 }
@@ -55,7 +57,7 @@ export default ({
       <View>
         {/* < YYYY.MM.DD. > */}
         <View style={{ flexDirection: "row", justifyContent: "center", alignItems: "center" }}>
-          <ArrowButton iconName="arrow-left" onPress={onPressLeftArrow} />
+            <ArrowButton iconName="arrow-left" onPress={onPressLeftArrow} />
 
           <TouchableOpacity onPress={onPressHeaderDate}>
             <Text style={{ fontSize: 20, color: "#404040" }}>{currentDateText}</Text>
@@ -90,7 +92,7 @@ export default ({
     const isCurrentMonth = dayjs(date).isSame(selectedDate, 'month');
     const onPress = () => onPressDate(date);
     const isSelected = dayjs(date).isSame(selectedDate, 'date');
-    const hasTodo = todoList.find(todo => dayjs(todo.date).isSame(dayjs(date), 'date'));
+    const hasTodo = todoList.find(todo => dayjs(todo.date).isSame(dayjs(date), 'date'));//일정의 유무 
     return (
       <Column
         text={dateText} 

@@ -77,11 +77,12 @@ export const useTodoList = (selectedDate) =>{
   useEffect(() => {
     init();
   }, []);
+  
   const init = async () => {
     const result = await AsyncStorage.getItem(TODO_LIST_KEY);
     console.log('result', typeof result, result);
     if (result) {
-      const newTodoList = JSON.parse(result);
+      const newTodoList = JSON.parse(result);// string화 된 문자열을 parsing 해줘야한다.
       console.log('newTodoList', typeof newTodoList, newTodoList);
       ////
       setTodoList(newTodoList);
